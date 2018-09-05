@@ -1,3 +1,4 @@
+use EtudiantsExchange;
 with personnes as (
 		select 
 			FORMAT(i.CREATE_TIME,'yyyyMMdd') as DATE,
