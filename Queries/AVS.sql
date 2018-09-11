@@ -34,8 +34,8 @@ GROUP by
 	COALESCE( pe.PERS_ID,-9) 
 )
 select 
-	COMEXP_PER_PERSONNE_AVS_BK
-	,JOUR_ID
+	convert(int,COMEXP_PER_PERSONNE_AVS_BK) as COMEXP_PER_PERSONNE_AVS_BK
+	,convert(int,JOUR_ID) as JOUR_ID
 	,AVS
 	,PERS_ID
  from Result r
