@@ -1,0 +1,12 @@
+WITH cte as (
+select 
+ORA_ID
+from personne.COMEXP_PER_PERSONNE_AVS
+GROUP by ORA_ID
+HAVING COUNT(ORA_ID)>1
+)
+SELECT
+*
+from personne.COMEXP_PER_PERSONNE_AVS
+inner join cte on cte.ORA_ID = COMEXP_PER_PERSONNE_AVS.ORA_ID
+ORDER by 7

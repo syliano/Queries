@@ -1,4 +1,3 @@
-use EtudiantsExchange;
 WITH 
 personnes as 
 	(
@@ -48,16 +47,18 @@ PersonneRecursiveFiltre as
 	)
 
 select DISTINCT
-	i.EXG_ID,
-	i.ORA_ID,
-	format(d.UPDATE_TIME,'yyyyMMdd') as DateFusion,
-	i.FK_PER_PERSONNE_MASTER,
+	convert(int,i.ORA_ID)				as	EXG_ACA_PROPOSITION_MAPPING_HISTO_BK,
+	convert(int,
+	format(d.UPDATE_TIME,'yyyyMMdd'))	as	JOUR_ID,
+	convert(int,
+	i.FK_PER_PERSONNE_MASTER)			as FK_PER_PERSONNE_MASTER,
+	convert(int,
 	COALESCE
 		(
 			per.PERS_ID,
 			rec.PERS_ID,
 			-9
-		)		as	PERS_ID
+		))								as	PERS_ID
 from		admission.EXG_ACA_PROPOSITION_MAPPING_HISTO i
 inner join	admission.EXG_ACA_PROPOSITION_MAPPING_HISTO	d	on	d.ORA_ID	=	i.ORA_ID
 															and d.REVTYPE	=	'D'
@@ -65,5 +66,4 @@ left JOIN	DWH_PRD.dbo.DIM_PERSONNE					per	on	per.ORA_ID	=	i.FK_PER_PERSONNE_MAS
 															and	per.VALID	=	1
 left join	PersonneRecursiveFiltre						rec	ON	rec.ORA_ID	=	i.ORA_ID
 															AND	rec.filtre	=	1
-where i.REVTYPE ='I' and i.ORA_ID = 1578
-ORDER by 1
+where i.REVTYPE ='I' 
