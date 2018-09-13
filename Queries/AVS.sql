@@ -41,3 +41,5 @@ select
  from Result r
  where one = 1
 
+ and COMEXP_PER_PERSONNE_AVS_BK in(8930,25)
+
